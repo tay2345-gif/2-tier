@@ -65,7 +65,8 @@ resource "aws_route_table_association" "public_subnet_2_assoc" {
 resource "aws_instance" "Webserver1" {
   ami                    = "ami-084568db4383264d4"  # Amazon Ubuntu AMI (Check latest AMI)
   instance_type          = "t2.micro"
-  subnet_id = aws_subnet.public_subnet_1.id
+  associate_public_ip_address = true
+subnet_id = aws_subnet.public_subnet_1.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
   user_data = base64encode(<<-EOF
@@ -85,7 +86,8 @@ EOF
 resource "aws_instance" "Webserver2" {
   ami                    = "ami-084568db4383264d4"  # Amazon Ubuntu AMI (Check latest AMI)
   instance_type          = "t2.micro"
-  subnet_id = aws_subnet.public_subnet_2.id
+  associate_public_ip_address = true
+subnet_id = aws_subnet.public_subnet_2.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
   user_data = base64encode(<<-EOF
